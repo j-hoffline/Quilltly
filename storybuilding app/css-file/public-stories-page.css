@@ -1,0 +1,98 @@
+/*
+Ghostwriter:
+- #DDDDDD
+- #222831
+- #30475E
+- #F05454
+
+Early Bird:
+- #EBEBEB
+- #F5A25D
+- #FA7F72
+- #389393
+
+Cafe Bum:
+- #FBD0A4
+- #000000
+*/
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+body {
+  background-color: #FBD0A4;
+  color: #343434;
+  margin: 0;
+  padding: 0;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 18px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+a {
+  color: #343434;
+  text-decoration: none;
+  padding: 50px;
+}
+a:hover {
+  text-decoration: none;
+}
+.title {
+  background-color: #FFFFFF;
+  padding: 10px;
+  border-bottom: #F05454 dashed;
+}
+.title h1{
+  font-family: 'Abril Fatface', cursive;
+  margin-bottom: 0;
+  font-size: 48px;
+}
+.title h4{
+  margin-top: 0;
+}
+.story-page{
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  text-align: left;
+
+}
+.new-story{
+  margin-top: 20px;
+  margin-right: 30px;
+  background-color: #ECFBA2;
+  padding: 20px;
+  padding-bottom: 55px;
+  border: #5F7105 groove;
+}
+
+.new-story h1{
+  margin-top: 0;
+  font-family: 'Sofia', cursive;
+  font-size: 34px;
+  text-decoration: underline;
+}
+
+.new-story button {
+  margin: 0;
+  float: right;
+}
+
+button {
+  background-color: #FA7F72;
+  padding: 7px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 14px;
+  border-radius: 12px;
+  margin-top: 15px;
+  display: inline-block;
+  width: 130px;
+}
+
+.features button{
+  width: 220px;
+  background-color: #F5A25D;
+}
