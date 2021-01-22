@@ -1,9 +1,8 @@
 import React, {useRef, useState} from "react"
-import {Form, Button, Card, Alert} from "react-bootstrap"
-import { useAuth } from '../contexts/AuthContext.js'
+import {Form, Button, Alert, Container} from "react-bootstrap"
+import { useAuth } from '../../contexts/AuthContext.js'
 import { Link, useHistory } from "react-router-dom"
-
-
+import "./AuthStyles.css"
 
 
 
@@ -39,9 +38,11 @@ export default function Signup(){
 
     return (
         <>
-            <Card>
-                <Card.Body>
-                    <h2>Sign Up</h2> 
+        
+            <Container className="d-flex align-items-center justify-content-center">
+            <div className="login align-items-center mt-5">
+                
+                    <h1 className="text-center mb-4 title">Sign Up</h1> 
                     {error && <Alert variant="danger">{error}</Alert>}
                     <Form onSubmit={handleSubmit}>
                         <Form.Group id="email">
@@ -49,23 +50,26 @@ export default function Signup(){
                             <Form.Control type="email" ref={emailRef} required />
                         </Form.Group> 
                         <Form.Group id="password">
-                            <Form.Label>Password</Form.Label>
+                            <Form.Label>Password (6+ characters)</Form.Label>
                             <Form.Control type="password" ref={passwordRef} required />
                         </Form.Group>
                         <Form.Group id="password-confirm">
                             <Form.Label>Confirm Password</Form.Label>
                             <Form.Control type="password" ref={passwordConfirmRef} required />
+
                         </Form.Group>
-                        <Button disabled={loading} className="w-100" type="submit">
+                        <Button disabled={loading} className="w-100" variant="secondary" type="submit">
                             Sign Up
                         </Button>
-                    </Form>
-                </Card.Body>
-
-            </Card>
-            <div className="w-100 text-center mt-2">
+                        <div className="w-100 text-center mt-2">
                 Already have an account? <Link to="/login">Log In</Link>
+                </div>
+                    </Form>
+               
+
             </div>
+            
+        </Container>
         </>
     
     )
