@@ -1,6 +1,6 @@
 import React from 'react';
 import "./home-page.css"
-import { Modal, Button, ButtonGroup, Link } from "react-bootstrap"
+import { Button, ButtonGroup, Link } from "react-bootstrap"
 import Login from "../AuthPages/Login.js"
 
 
