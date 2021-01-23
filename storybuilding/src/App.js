@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import {createBrowserHistory} from 'history';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+
 import 'firebase/firestore';
 import Homepage from './components/HomePage/HomePage';
 import LoginPage from './components/LoginPage/LoginPage';
@@ -31,6 +32,7 @@ function App() {
    const history = createBrowserHistory();
 
     return (
+
       <Router history={history}>
         <div className="App">
           <header className="App-header">

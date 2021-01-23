@@ -11,7 +11,7 @@ export default function Signup(){
 
     const emailRef = useRef()
     const passwordRef = useRef()
-    const passwordConfirmRef = useRef() 
+    const passwordConfirmRef = useRef()
     const {signup} = useAuth()
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
@@ -22,19 +22,19 @@ export default function Signup(){
         if (passwordRef.current.value !== passwordConfirmRef.current.value) {
             return setError("Passwords do not match")
           }
-      
+
         try {
             setError("")
             setLoading(true)
             await signup(emailRef.current.value, passwordRef.current.value)
-            history.push("/")
+            history.push("/homePage")
           } catch {
             setError("Failed to create an account")
           }
-      
+
           setLoading(false)
     }
-    
+
 
     return (
         <>
@@ -48,7 +48,7 @@ export default function Signup(){
                         <Form.Group id="email">
                             <Form.Label>Email</Form.Label>
                             <Form.Control type="email" ref={emailRef} required />
-                        </Form.Group> 
+                        </Form.Group>
                         <Form.Group id="password">
                             <Form.Label>Password (6+ characters)</Form.Label>
                             <Form.Control type="password" ref={passwordRef} required />
@@ -71,6 +71,6 @@ export default function Signup(){
             
         </Container>
         </>
-    
+
     )
 }
