@@ -1,69 +1,87 @@
-import React, { useRef, useState } from "react"
-import { Form, Button, Alert, Container } from "react-bootstrap"
-import { useAuth } from "../../contexts/AuthContext"
-import { Link, useHistory } from "react-router-dom"
-import "./AuthStyles.css"
+import React from "react";
+import { Form, Button, Alert, Container } from "react-bootstrap";
+import { Link, Redirect, useHistory } from "react-router-dom";
+import { app, auth } from '../firebase';
+import "./AuthStyles.css";
 
+class Login extends React.Component {
+  constructor(props) {
+    super(props);
 
-export default function Login(props) {
-  const emailRef = useRef()
-  const passwordRef = useRef()
-  const { login } = useAuth()
-  const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
-  const history = useHistory()
-
-  async function handleSubmit(e) {
-    e.preventDefault()
-
-    try {
-      setError("")
-      setLoading(true)
-      await login(emailRef.current.value, passwordRef.current.value)
-      history.push("/")
-    } catch {
-      setError("Failed to log in")
+    this.state = {
+      error: "",
+      emailRef: "",
+      passwordRef: ""
     }
 
-    setLoading(false)
+    this.loginUser = this.loginUser.bind(this);
   }
 
+  loginUser(e) {
+    e.preventDefault()
 
+    auth.setPersistence(app.auth.Auth.Persistence.SESSION).then(() => {
+      return auth.signInWithEmailAndPassword(this.state.emailRef, this.state.passwordRef)
+    }).then(() => {console.log('User successfully signed in');
+                    window.location.replace('/public');})
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        this.setState({...this.state, error: `${errorCode}: ${errorMessage}`});
+      });
+  }
 
-  return (
-    <>
-      <Container className="d-flex align-items-center justify-content-center body">
-        <div className="login align-items-center mt-5">
- 
-            <h1 className="text-center mb-4 title">Log In</h1>
-            {error && <Alert variant="danger">{error}</Alert>}
-            <Form onSubmit={handleSubmit}>
-              <div id="email">
-                <Form.Label>Email</Form.Label>
-                <Form.Control type="email" ref={emailRef} required />
-              </div>
-              <Form.Group id="password">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" ref={passwordRef} required />
-              </Form.Group>
-              <Button disabled={loading} className="w-100" variant="secondary" type="submit">
+  componentDidMount() {
+    if (auth.currentUser) {
+      window.location.replace('/public');
+    }
+  }
+
+  render() {
+
+    return(
+      <>
+        <Container className="d-flex align-items-center justify-content-center body">
+          <div className="login align-items-center mt-5">
+  
+              <h1 className="text-center mb-4 title">
                 Log In
-            </Button>
-            </Form>
-            <div className="w-100 text-center mt-3">
-              <Link to="/forgot-password">Forgot Password?</Link>
-            </div>
-            <div className="w-100 text-center">
-              Need an account? <Link to="/signup">Sign Up</Link>
-            </div>
+              </h1>
 
-        </div>
+              {this.state.error && <Alert variant="danger">{this.state.error}</Alert>
+              }
 
+              <Form className="form" onSubmit={this.loginUser}>
+                <div id="email">
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control type="email" onChange={(event) => this.setState({...this.state, emailRef: event.target.value})} required />
+                </div>
 
-      </Container>
+                <Form.Group id="password">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control type="password" onChange={(event) => this.setState({...this.state, passwordRef: event.target.value})} required />
+                </Form.Group>
 
+                <Button className="w-100" variant="secondary" type="submit">
+                  Log In
+                </Button>
 
-    </>
-  )
+              </Form>
+
+              <div className="w-100 text-center mt-3">
+                <Link to="/forgot-password">Forgot Password?</Link>
+              </div>
+              
+              <div className="w-100 text-center">
+                Need an account? <Link to="/signup">Sign Up</Link>
+              </div>
+
+          </div>
+        </Container>
+      </>
+    );
+  }
 }
+
+export default Login;
 

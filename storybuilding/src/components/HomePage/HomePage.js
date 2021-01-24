@@ -1,7 +1,8 @@
 import React from 'react';
-import "./home-page.css"
-import { Button, ButtonGroup, Link } from "react-bootstrap"
-import Login from "../AuthPages/Login.js"
+import {Redirect} from 'react-router-dom';
+import "./home-page.css";
+import { Modal, Button, ButtonGroup, Link } from "react-bootstrap";
+import {auth} from '../firebase';
 
 
 class HomePage extends React.Component {
@@ -27,10 +28,7 @@ class HomePage extends React.Component {
                         Sign Up
                     </Button>
                 </ButtonGroup>
-                </div>
-
-
-           
+                </div>           
             </div>
         );
     }

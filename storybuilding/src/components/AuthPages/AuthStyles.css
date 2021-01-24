@@ -78,6 +78,7 @@ a:hover {
   width: 600px;
   border: #5F7105;
   border-width: 1px;
+  margin: auto;
 }
 
 .login-explanation h2{
@@ -96,5 +97,9 @@ button {
   width: 100px;
   display: inline-block; /* so that the button didn't collapse with the padding and margin
   of the content */
+}
+
+.form {
+  margin: 16px;
 }
 
