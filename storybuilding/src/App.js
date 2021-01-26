@@ -5,6 +5,7 @@ import HomePage from './components/HomePage/HomePage';
 import Login from './components/AuthPages/Login';
 import SignUp from './components/AuthPages/Signup';
 import PublicStoriesPage from './components/PublicStoriesPage/PublicStoriesPage';
+import Settings from './components/AuthPages/Settings';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
                 <Route path="/login" exact component={Login} />
                 <Route path="/signup" exact component={SignUp} />
                 <Route path="/public" exact component={PublicStoriesPage}/>
+                <Route path="/settings" exact component={Settings}/>
         </Router>
       </div>
     );
