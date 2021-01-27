@@ -34,10 +34,7 @@ class PublicStoriesPage extends React.Component {
   render() {
     return (
       <div>
-        <Link to={"/settings"}>
-          Settings
-        </Link>
-
+        
         <section class="story-page">
           {this.state.publicGames ?
             this.state.publicGames.map((game) => {
@@ -66,6 +63,9 @@ class PublicStoriesPage extends React.Component {
             <button type="submit"> Join game </button>
           </div>
         </section>
+        <Link to={"/settings"}>
+          Settings
+        </Link>
 
       </div>
     );
