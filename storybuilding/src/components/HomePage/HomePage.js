@@ -12,11 +12,10 @@ class HomePage extends React.Component {
 
     render() {
         return(
-            <div>  
+            <div>
                 <div className="title text-center mb-4">
-                    <h1>Story Builder App</h1>
-                    <h2>Relax and play with friends at leisure</h2>
-                    <p> put some fancy explanation to it </p>
+                  <h1>Quillty</h1>
+                  <h4> ~ Manifesting your story and fantasy ~</h4>
                 </div>
                 <div className="d-flex align-items-center justify-content-center">
                 <ButtonGroup>
@@ -28,7 +27,7 @@ class HomePage extends React.Component {
                         Sign Up
                     </Button>
                 </ButtonGroup>
-                </div>           
+                </div>
             </div>
         );
     }
