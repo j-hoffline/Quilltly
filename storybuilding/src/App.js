@@ -7,7 +7,6 @@ import SignUp from './components/AuthPages/Signup';
 import PublicStoriesPage from './components/PublicStoriesPage/PublicStoriesPage';
 import Settings from './components/AuthPages/Settings';
 
-
 function App() {
   console.log(process.env.REACT_APP_FIREBASE_APP_KEY);
    const history = createBrowserHistory();
@@ -20,7 +19,7 @@ function App() {
                 <Route path="/signup" exact component={SignUp} />
                 <Route path="/public" exact component={PublicStoriesPage}/>
                 <Route path="/settings" exact component={Settings}/>
-        </Router>
+        </Router>      
       </div>
     );
   }
