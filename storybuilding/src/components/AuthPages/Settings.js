@@ -11,9 +11,11 @@ class Settings extends React.Component {
             user: auth.currentUser,
             error: "",
             newEmail: "",
-            password: ""
+            password: "",
+            msg:""
         }
         this.changeEmail = this.changeEmail.bind(this)
+        this.resetPassword = this.resetPassword.bind(this)
     }
 
     componentDidMount() {
@@ -22,9 +24,12 @@ class Settings extends React.Component {
         //}
     }
 
-    resetPassword() {
+    resetPassword(e) {
+        
+        e.preventDefault()
+        this.setState({...this.state, error: ""})
         auth.sendPasswordResetEmail(auth.currentUser.email).then(() => {
-            //send email
+            this.setState({...this.state, msg: "Check email for further instructions."})
         })
             .catch((error) => {
                 var errorCode = error.code;
@@ -35,18 +40,26 @@ class Settings extends React.Component {
     }
 
     changeEmail(e) {
+        //reset previous error messages
+        
         e.preventDefault()
+        
         auth.signInWithEmailAndPassword(this.state.user.email, this.state.password)
+        if (this.state.user.email !== this.state.newEmail){
         auth.currentUser.updateEmail(this.state.newEmail).then(() => {
             console.log(this.state.newEmail)
             console.log(auth.currentUser.email)
+            this.setState({...this.state, msg: "Email set to " + this.state.newEmail })
             // Update successful.
         }).catch((error) => {
             // An error happened.
             var errorCode = error.code;
             var errorMessage = error.message;
             this.setState({ ...this.state, error: `${errorCode}: ${errorMessage}` });
-        });
+        });}
+        else{
+            this.setState({...this.state, msg: "This email is already set to this account."})
+        }
     }
 
 
@@ -65,7 +78,7 @@ class Settings extends React.Component {
                             }
                         </div>
                         <div>
-                            Email: {this.state.user.email}
+                            {this.state.msg}
                     </div>
 
                         <Form className="form" onSubmit={this.changeEmail}>
