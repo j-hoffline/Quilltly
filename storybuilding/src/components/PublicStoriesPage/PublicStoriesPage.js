@@ -1,5 +1,5 @@
 import React from 'react';
-import {Redirect} from 'react-router-dom';
+import {Redirect, Link} from 'react-router-dom';
 import {database, auth} from '../firebase';
 
 class PublicStoriesPage extends React.Component {
@@ -7,12 +7,12 @@ class PublicStoriesPage extends React.Component {
         super(props);
 
         this.state = {
-          publicGames: ""
+          publicGames: "",
         };
     }
 
     componentDidMount() {
-      //Pull public games stored in database and pass to state
+      //Pull public games stored in database and pass to state 
         let gameArr = []
         database.ref('/games/').once('value').then((snapshot) => {
           let results = snapshot.val()
@@ -31,41 +31,45 @@ class PublicStoriesPage extends React.Component {
         });
     }
 
-    render() {
-        return(
-            <div>
-              <section class = "story-page">
-                {this.state.publicGames ?
-                  this.state.publicGames.map((game) => {
-                    return(
-                      <div class = "new-story-1">
-                        <form action=".. fill it later .." method="get">
-                          <h1> {game.content[0]} </h1>
-                        </form> <br />
-                        <button type = "submit"> Join game </button>
-                      </div>
-                    );
-                  }) : <h1>No public games found</h1> }
+  render() {
+    return (
+      <div>
+        
+        <section class="story-page">
+          {this.state.publicGames ?
+            this.state.publicGames.map((game) => {
+              return (
+                <div class="new-story-1">
+                  <form action=".. fill it later .." method="get">
+                    <h1> {game.content[0]} </h1>
+                  </form> <br />
+                  <button type="submit"> Join game </button>
+                </div>
+              );
+            }) : <h1>No public games found</h1>}
 
-                      <div class = "new-story-2">
-                        <form action=".. fill it later .." method="get">
-                          <h1> Caraousel </h1>
-                        </form> <br />
-                       <button type = "submit"> Join game </button>
-                      </div>
-
-                      <div class = "new-story-3">
-                        <form action=".. fill it later .." method="get">
-                          <h1> Caraousel </h1>
-
-                        </form><br />
-                        <button type = "submit"> Join game </button>
-                      </div>
-      </section>
-
+          <div class="new-story-2">
+            <form action=".. fill it later .." method="get">
+              <h1> Caraousel </h1>
+            </form> <br />
+            <button type="submit"> Join game </button>
           </div>
-        );
-    }
+
+          <div class="new-story-3">
+            <form action=".. fill it later .." method="get">
+              <h1> Caraousel </h1>
+
+            </form><br />
+            <button type="submit"> Join game </button>
+          </div>
+        </section>
+        <Link to={"/settings"}>
+          Settings
+        </Link>
+
+      </div>
+    );
+  }
 }
 
 export default PublicStoriesPage;

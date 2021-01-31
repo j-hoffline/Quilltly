@@ -5,7 +5,7 @@ import HomePage from './components/HomePage/HomePage';
 import Login from './components/AuthPages/Login';
 import SignUp from './components/AuthPages/Signup';
 import PublicStoriesPage from './components/PublicStoriesPage/PublicStoriesPage';
-
+import Settings from './components/AuthPages/Settings';
 
 function App() {
   console.log(process.env.REACT_APP_FIREBASE_APP_KEY);
@@ -18,7 +18,8 @@ function App() {
                 <Route path="/login" exact component={Login} />
                 <Route path="/signup" exact component={SignUp} />
                 <Route path="/public" exact component={PublicStoriesPage}/>
-        </Router>
+                <Route path="/settings" exact component={Settings}/>
+        </Router>      
       </div>
     );
   }
