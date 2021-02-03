@@ -1,7 +1,7 @@
 import React, {useRef, useState} from "react"
 import {Form, Button, Alert, Container} from "react-bootstrap"
 import { Link, useHistory } from "react-router-dom"
-import {auth, app} from '../firebase';
+import {auth, app, database} from '../firebase';
 import "./AuthStyles.css"
 
 class SignUp extends React.Component {
@@ -10,6 +10,7 @@ class SignUp extends React.Component {
 
         this.state = {
             error: "",
+            usernameRef: "",
             passwordRef: "",
             passwordCheckRef: "",
             emailRef: ""
@@ -20,18 +21,27 @@ class SignUp extends React.Component {
 
     createAccount(e) {
         e.preventDefault()
-        console.log(e);
+        //Checks if passwords match before displaying error
         if (this.state.passwordRef !== this.state.passwordCheckRef) {
             return this.setState({...this.state, error: "Passwords do not match."});
           }
         
+        //Sets auth persistence for app to session (should be changed to LOCAL before production)
         auth.setPersistence(app.auth.Auth.Persistence.SESSION).then(() => {
             return auth.createUserWithEmailAndPassword(this.state.emailRef, this.state.passwordRef);
         }).then((userCredential) => {
                 // Signed in 
-                var user = userCredential.user;
                 console.log("User account successfully created");
-                window.location.replace("/public");
+                //Creates database entry for new user
+                if (userCredential.additionalUserInfo.isNewUser) {
+                    var userID = userCredential.user.uid;
+                    console.log(userCredential);
+                    database.ref('users/' + userID).set({
+                        username: this.state.usernameRef,
+                        email: this.state.emailRef,
+                        startedGames: "[]"
+                    }).then(console.log("User entry established"));
+                }
             })
             .catch((error) => {
                 var errorCode = error.code;
@@ -43,15 +53,19 @@ class SignUp extends React.Component {
     render() {
         return(
             <>        
-                <Container className="d-flex align-items-center justify-content-center">
-                <div className="login align-items-center mt-5">
-                    
-                    <h1 className="text-center mb-4 title">Sign Up</h1> 
+                <Container>
+                <div className="login-wrapper">
 
                     {this.state.error && <Alert variant="danger">{this.state.error}</Alert>}
 
-                    <Form onSubmit={this.createAccount}>
-                        <Form.Group id="email">
+                    <Form className="auth-form" onSubmit={this.createAccount}>
+                        <Form.Group id="username" className="form-group">
+                            <Form.Label>Username</Form.Label>
+                            <Form.Control type="text" pattern="[a-zA-Z0-9]+"
+                                onChange={(event) => this.setState({...this.state, usernameRef: event.target.value})} required />
+                        </Form.Group>
+                        
+                        <Form.Group id="email" className="form-group">
                             <Form.Label>Email</Form.Label>
                             <Form.Control type="email" onChange={(event) => this.setState({...this.state, emailRef: event.target.value})} required />
                         </Form.Group>
@@ -66,14 +80,9 @@ class SignUp extends React.Component {
                             <Form.Control type="password" onChange={(event) => this.setState({...this.state, passwordCheckRef: event.target.value})} required />
                         </Form.Group>
 
-                        <Button className="w-100" variant="secondary" type="submit">
-                            Sign Up
+                        <Button className="bubble-button submit-button" variant="secondary" type="submit">
+                            Create Account
                         </Button>
-
-                        <div className="w-100 text-center mt-2">
-                            Already have an account? 
-                            <Link to="/login">Log In</Link>
-                        </div>
                     </Form>   
                 </div>
                 

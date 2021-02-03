@@ -1,0 +1,39 @@
+.game-card  {
+  position: relative;
+  padding: 12px;
+  background-color: #fff;
+  border-radius: 8px;
+  margin: 36px;
+}
+
+.title {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-family: sans-serif;
+  width: 0;
+}
+
+.preview {
+  font-family: sans-serif;
+}
+
+.button-div {
+  margin-right: 16px;
+  margin-left: 16px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.join-button {
+  margin-top: 55%;
+
+}
+
+.story-setting {
+  display: inline;
+  margin-right: 24px;
+  margin-top: 8px;
+  white-space: nowrap;
+}

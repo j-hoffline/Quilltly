@@ -1,0 +1,30 @@
+.story-wrapper {
+    /*Div that holds each GameCard screen*/
+    position: static;
+    background-color:#A8C1D8;
+    transition-property: all;
+    transition-duration: 2s;
+    display: block;
+    
+}
+
+.story-nav {
+    position: absolute;
+    height: 0;
+    overflow: hidden;
+    text-align: center;
+    width: 100%;
+    background-color: #A8C1D8;
+    line-height: 64px;
+}
+
+.story-nav-tag {
+    display: inline;
+    font-size: 24px;
+    font-weight: 500;
+    margin-left: 36px;
+} 
+.story-nav-tag:hover {
+    cursor: pointer;
+}
+

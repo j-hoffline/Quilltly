@@ -24,22 +24,19 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
-body {
-  background-color: #FBD0A4;
+.login-wrapper {
+  background-color:#fff;
   color: #343434;
   margin: 0;
-  padding: 0;
+  padding: 16px;
   font-family: 'Quicksand', sans-serif;
   font-size: 18px;
   line-height: 1.65;
   text-align: center;
+  margin: 30px;
+  
+  border-radius: 16px;
 }
-
-a {
-  color: #343434;
-  text-decoration: none;
-  padding: 22px;
-};
 
 a:hover {
   text-decoration: none;
@@ -48,7 +45,6 @@ a:hover {
 .title {
   background-color: #FFFFFF;
   padding: 10px;
-  border-bottom: #F05454 dashed;
 }
 .title h1{
   font-family: 'Abril Fatface', cursive;
@@ -87,19 +83,28 @@ a:hover {
   text-decoration: underline;
 }
 
-button {
-  background-color: #FA7F72;
-  padding: 7px;
-  font-family: 'Quicksand', sans-serif;
-  font-size: 14px;
-  border-radius: 12px;
-  margin-top: 15px;
-  width: 100px;
-  display: inline-block; /* so that the button didn't collapse with the padding and margin
-  of the content */
+.form-group {
+  margin: 16px;
 }
 
-.form {
-  margin: 16px;
+.form-control-label {
+  text-align: left;
+}
+
+.submit-button {
+  background-color: #101D42;
+}
+
+.form-control {
+  font-family: Poppins, sans-serif;
+  font-size: 24px;
+  
+  width: 100%;
+  border: none;
+  margin-left: 8px;
+  border-bottom: 2px solid grey;
+}
+.form-control:focus {
+  border-bottom-color:  #101D42;
 }
 
