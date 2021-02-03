@@ -18,16 +18,16 @@ class HomePage extends React.Component {
         this.taglineLibrary = ["Get Serious. Get Stories", "The Wonder Has A Name: Stories.",
             "You're In Good Hands With Stories.", "Stories, Couldn't Ask For More.",
             "Have You Had Your Stories Today?", "Stories Built To Perfection.",
-            "Stories - Now!", "Don't Live A Little, Live A Story.", 
-            "Today's Stories, Since 1903.", "Great Stories. Great Times.", 
+            "Stories - Now!", "Don't Live A Little, Live A Story.",
+            "Today's Stories, Since 1903.", "Great Stories. Great Times.",
             "Let The Stories Begin.", "Pure Stories.", "Stories, Try It You'll Like It!",
             "Get Your Daily Dose Of Stories.", "Stories For Me!", "You Wouldn't Want To Miss Stories.",
-            "Stories For Your Life.", "Say It With A Story.", "Stories. See More. Do More.", 
-            "Stories New And Improved.", "Building A Better Tomorrow With Stories.", 
-            "For the joy of stories.", "Stories, What Else?", "The More Stories The Better.", 
-            "Red Hot Stories.", "The Future Of Stories.", "Stories Born And Bred.", 
-            "Stories - A Safe Place In An Unsafe World!", "We Build Stories.", 
-            "Have Stories Your Way.", "Stories: The Best Service Around.", 
+            "Stories For Your Life.", "Say It With A Story.", "Stories. See More. Do More.",
+            "Stories New And Improved.", "Building A Better Tomorrow With Stories.",
+            "For the joy of stories.", "Stories, What Else?", "The More Stories The Better.",
+            "Red Hot Stories.", "The Future Of Stories.", "Stories Born And Bred.",
+            "Stories - A Safe Place In An Unsafe World!", "We Build Stories.",
+            "Have Stories Your Way.", "Stories: The Best Service Around.",
             "The Stories of Champions.", "Stories, You Know You Want It.", "When The Going Gets Tough, the Tough Get Stories."
         ];
 
@@ -74,16 +74,16 @@ class HomePage extends React.Component {
                             <h4 id="tagline">{this.tagline}</h4>
                         </div>
 
-                        <div class="button-div">          
-                            <Button className="bubble-button" id="log-in-button" variant="primary" 
+                        <div class="button-div">
+                            <Button className="bubble-button" id="log-in-button" variant="primary"
                                 onClick={() => (this.setState({...this.state, modalOpen: true, loginToggle: true}))}>
                                 Log In
                             </Button> <br />
-                    
-                            <Button className="bubble-button" id="sign-up-button" variant="primary" 
+
+                            <Button className="bubble-button" id="sign-up-button" variant="primary"
                                 onClick={() => (this.setState({...this.state, modalOpen: true, signupToggle: true}))}>
                                 Sign Up
-                            </Button>        
+                            </Button>
                         </div>
                     </div>
 
@@ -96,7 +96,7 @@ class HomePage extends React.Component {
                                 {this.state.signupToggle && "Sign Up"}
                                 {this.state.forgotPasswordToggle && "Forgot Password"}
                             </Modal.Title>
-                            <button id="closeButton" type="button" 
+                            <button id="closeButton" type="button"
                                 onClick={() => (this.setState({...this.state, modalOpen: false, loginToggle: false, signupToggle: false, forgotPasswordToggle: false}))}>
                                     X
                             </button>
@@ -109,14 +109,14 @@ class HomePage extends React.Component {
                         </Modal.Body>
 
                         <Modal.Footer>
-                            {this.state.loginToggle && 
+                            {this.state.loginToggle &&
                                 <div>
                                     <div>
                                         <Link onClick={() => (this.setState({...this.state, signupToggle: false, loginToggle: false, forgotPasswordToggle: true}))}>
                                             Forgot Password?
                                         </Link>
                                     </div>
-                    
+
                                     <div>
                                         Need an account? <Link onClick={() => (this.setState({...this.state, signupToggle: true, loginToggle: false}))}>
                                             Sign Up
@@ -124,7 +124,7 @@ class HomePage extends React.Component {
                                     </div>
                                 </div>}
 
-                            {this.state.signupToggle && 
+                            {this.state.signupToggle &&
                                 <div className="w-100 text-center mt-2">
                                     Already have an account? <Link onClick={() => (this.setState({...this.state, signupToggle: false, loginToggle: true}))}>Log In</Link>
                                 </div>}

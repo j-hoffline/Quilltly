@@ -7,12 +7,13 @@ import Login from './components/AuthPages/Login';
 import SignUp from './components/AuthPages/Signup';
 import PublicStoriesPage from './components/PublicStoriesPage/PublicStoriesPage';
 import Dashboard from './components/Dashboard/Dashboard';
+import Settings from './components/AuthPages/Settings';
 
 
 function App() {
 
   auth.onAuthStateChanged(function(user) {
-    //Using setTimeout to delay the redirection of the user after login or signup. 
+    //Using setTimeout to delay the redirection of the user after login or signup.
     //This fixed the database entry being interrupted by the redirect while maintaining a global auth state
     setTimeout(() => {
       if (user) {
@@ -23,25 +24,27 @@ function App() {
         }
       } else {
         //User is not signed in and should only be directed towards homepage
-        if (window.location.href !== "http://localhost:3000/") { 
-          window.location.replace("/"); 
+        if (window.location.href !== "http://localhost:3000/") {
+          window.location.replace("/");
         }
       }
     }, 1000)
   });
-  
+
    const history = createBrowserHistory();
 
-  return (
-    <div>
-      <Router history={history}>
-              <Route path="/" exact component={HomePage} />
-              <Route path="/public" exact component={PublicStoriesPage}/>
-              <Route path="/dashboard" exact component={Dashboard} />
-      </Router>
-    </div>
-  );
+    return (
+      <div>
+        <Router history={history}>
+                <Route path="/" exact component={HomePage} />
+                <Route path="/login" exact component={Login} />
+                <Route path="/signup" exact component={SignUp} />
+                <Route path="/public" exact component={PublicStoriesPage}/>
+                <Route path="/settings" exact component={Settings}/>
+        </Router>
+      </div>
+    );
   }
-  
+
 
 export default App;

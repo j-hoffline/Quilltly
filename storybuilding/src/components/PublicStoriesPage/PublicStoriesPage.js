@@ -1,5 +1,5 @@
 import React from 'react';
-import {Redirect} from 'react-router-dom';
+import {Redirect, Link} from 'react-router-dom';
 import {database, auth} from '../firebase';
 import PublicStoryCard from './PublicStoryCard';
 import GameCard from '../GameCard/GameCard';
@@ -15,7 +15,7 @@ class PublicStoriesPage extends React.Component {
 
     componentDidMount() {
         console.log("firebase call made");
-        //Pull public games stored in database and pass to state 
+        //Pull public games stored in database and pass to state
           let gameArr = []
           database.ref('/games/').once('value').then((snapshot) => {
             let results = snapshot.val()
@@ -42,16 +42,30 @@ class PublicStoriesPage extends React.Component {
     render() {
       //Returns public games from database
         return(
-          <div>  
+          <div>
             <section class = "story-page">
-              {!this.state.publicGames.length == 0 ? 
+              {!this.state.publicGames.length == 0 ?
                 this.state.publicGames.map((game) => {
-                  return(<GameCard gameInfo={game}/>);               
-                }) : <h1>No public games found</h1> }         
+                  return(<GameCard gameInfo={game}/>);
+                }) : <h1>No public games found</h1> }
             </section>
           </div>
-        );
-    }
+
+          <div class="new-story-3">
+            <form action=".. fill it later .." method="get">
+              <h1> Caraousel </h1>
+
+            </form><br />
+            <button type="submit"> Join game </button>
+          </div>
+        </section>
+        <Link to={"/settings"}>
+          Settings
+        </Link>
+
+      </div>
+    );
+  }
 }
 
 export default PublicStoriesPage;

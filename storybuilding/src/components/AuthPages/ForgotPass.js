@@ -35,7 +35,7 @@ class ForgotPass extends React.Component {
                             Reset
                         </Button>
                     </Form>
-        
+
                 </div>
             </Container>
             </>
