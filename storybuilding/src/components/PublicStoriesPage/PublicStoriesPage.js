@@ -50,22 +50,8 @@ class PublicStoriesPage extends React.Component {
                 }) : <h1>No public games found</h1> }
             </section>
           </div>
-
-          <div class="new-story-3">
-            <form action=".. fill it later .." method="get">
-              <h1> Caraousel </h1>
-
-            </form><br />
-            <button type="submit"> Join game </button>
-          </div>
-        </section>
-        <Link to={"/settings"}>
-          Settings
-        </Link>
-
-      </div>
-    );
-  }
+        );
+}
 }
 
 export default PublicStoriesPage;

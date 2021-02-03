@@ -36,11 +36,12 @@ function App() {
     return (
       <div>
         <Router history={history}>
-                <Route path="/" exact component={HomePage} />
-                <Route path="/login" exact component={Login} />
-                <Route path="/signup" exact component={SignUp} />
-                <Route path="/public" exact component={PublicStoriesPage}/>
-                <Route path="/settings" exact component={Settings}/>
+          <Route path="/" exact component={HomePage} />
+          <Route path="/dashboard" exact component={Dashboard} />
+          <Route path="/login" exact component={Login} />
+          <Route path="/signup" exact component={SignUp} />
+          <Route path="/public" exact component={PublicStoriesPage}/>
+          <Route path="/settings" exact component={Settings}/>
         </Router>
       </div>
     );
