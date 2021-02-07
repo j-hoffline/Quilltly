@@ -33,15 +33,6 @@ class SignUp extends React.Component {
                 // Signed in 
                 console.log("User account successfully created");
                 //Creates database entry for new user
-                if (userCredential.additionalUserInfo.isNewUser) {
-                    var userID = userCredential.user.uid;
-                    console.log(userCredential);
-                    database.ref('users/' + userID).set({
-                        username: this.state.usernameRef,
-                        email: this.state.emailRef,
-                        startedGames: "[]"
-                    }).then(console.log("User entry established"));
-                }
             })
             .catch((error) => {
                 var errorCode = error.code;

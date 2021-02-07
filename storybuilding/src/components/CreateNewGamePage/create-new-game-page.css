@@ -20,3 +20,8 @@
     margin-left: 8px;
     border: none;
 }
+
+#counter-div {
+    float: right;
+    margin-right: 16px;
+}

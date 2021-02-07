@@ -14,9 +14,7 @@ class PublicStoriesPage extends React.Component {
     }
 
     componentDidMount() {
-        console.log("firebase call made");
         //Pull public games stored in database and pass to state
-          let gameArr = []
           database.ref('/games/').once('value').then((snapshot) => {
             let results = snapshot.val()
             if (!results) {
@@ -27,16 +25,14 @@ class PublicStoriesPage extends React.Component {
               for (let i in results) {
                 if (results[i].public) {
                   this.setState({...this.state, publicGames: [...this.state.publicGames, {id: i, gameInfo: results[i]}]});
-                } else {continue;}
-                //Convert content string into list
-                /* let contentArr = results[i].content.substring(1, results[i].content.length - 1);
-                results[i].content = contentArr.split(",");
-                gameArr.unshift(results[i]); */
+                }
               }
-              /* sessionStorage.setItem("pulledGames", gameArr);
-              this.setState({...this.state, publicGames: gameArr}); */
             }
           });
+        }
+
+      componentWillUnmount() {
+        sessionStorage.setItem("publicGames", JSON.stringify(this.state.publicGames));
       }
 
     render() {
@@ -44,14 +40,14 @@ class PublicStoriesPage extends React.Component {
         return(
           <div>
             <section class = "story-page">
-              {!this.state.publicGames.length == 0 ?
+              {this.state.publicGames.length > 0 ?
                 this.state.publicGames.map((game) => {
                   return(<GameCard gameInfo={game}/>);
                 }) : <h1>No public games found</h1> }
             </section>
           </div>
         );
-}
+    }
 }
 
 export default PublicStoriesPage;
