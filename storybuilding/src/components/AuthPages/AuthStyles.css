@@ -38,6 +38,8 @@ html {
   border-radius: 16px;
 }
 
+
+
 a:hover {
   text-decoration: none;
 }
@@ -93,6 +95,28 @@ a:hover {
 
 .submit-button {
   background-color: #101D42;
+}
+
+.bubble-button {
+  margin-left: 24px;
+  margin-right: 24px;
+  background-color: darkgray;
+  font-size: 18px;
+  padding: 12px;
+  border-radius: 48px;
+  color: white;
+  white-space: nowrap;
+  padding-left: 32px;
+  padding-right: 32px;
+  text-decoration: none;
+  margin-bottom: 30px;
+  border: none;
+}
+
+.bubble-button:hover {
+  cursor: pointer;
+  filter: brightness(110%);
+  box-shadow: 0 2px 4px rgb(100, 100, 100);
 }
 
 .form-control {

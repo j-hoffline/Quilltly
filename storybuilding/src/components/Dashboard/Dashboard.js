@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Logo from './images/quill-n-ink-earlybird.png';
 import TimelineBlip from './images/iconmonstr-circle-2.svg';
 import NotificationBell from './images/iconmonstr-bell-1.svg';
@@ -9,6 +10,9 @@ import PublicStoryCard from '../PublicStoriesPage/PublicStoryCard';
 import PublicStoriesPage from '../PublicStoriesPage/PublicStoriesPage';
 import RecentGamesPage from '../RecentGamesPage/RecentGamesPage';
 import CreateNewGamePage from '../CreateNewGamePage/CreateNewGamePage';
+import { Modal, Button } from 'react-bootstrap';
+import Signout from "../AuthPages/Signout.js"
+import Settings from "../AuthPages/Settings.js";
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -18,7 +22,10 @@ class Dashboard extends React.Component {
             recentGamesFocus: true,
             publicGamesFocus: false,
             createNewGameFocus: false,
-            newNotification: false
+            newNotification: false,
+            modalOpen:false,
+            settingsToggle: false,
+            profileToggle:false
         }
 
         this.focusTag = this.focusTag.bind(this);
@@ -93,17 +100,40 @@ class Dashboard extends React.Component {
 
                 <div className="user-actions">
                     <div className="user-action">
+                        
                         <img className="user-action" src={NotificationBell} alt="Notifications" />
                         <div id="notification-blip" className="notification-blip"></div>
-                    </div>
-                    <div className="user-action">
+                    </div >
+                    <div className="user-action" 
+                        onClick={() => (this.setState({...this.state, modalOpen: true, settingsToggle: true, profileToggle:false}))}>
                         <img className="user-action" src={SettingsGear} alt="Settings" />
                     </div>
-                    <div className="user-action">
+                    <div className="user-action"
+                        onClick={() => {this.setState({...this.state, modalOpen: true, profileToggle: true, settingsToggle:false})}}>
                         <img className="user-action" src={ProfileIcon} alt="Profile" />
                     </div>
                 </div>
             </div>
+
+            {this.state.modalOpen }
+
+            <Modal className="modal" show={this.state.modalOpen}>
+                <Modal.Header>
+                    <Modal.Title className="modal-header">
+                        {this.state.settingsToggle && "Settings"}
+                        {this.state.profileToggle && "Profile"}
+                    </Modal.Title>
+                    <button id ="closeButton" type="button"
+                        onClick={() => (this.setState({...this.state, modalOpen: false, settingsToggle:false, profileToggle:false}))}>
+                            X
+                    </button>
+                </Modal.Header>
+                <Modal.Body>
+                    {this.state.profileToggle && <Signout />}
+                    {this.state.settingsToggle && <Settings />}
+                </Modal.Body> 
+            </Modal>
+
             {//End of nav-bar
                 this.state.publicGamesFocus && <PublicStoriesPage />}
 

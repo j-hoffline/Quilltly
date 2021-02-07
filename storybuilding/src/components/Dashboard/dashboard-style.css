@@ -9,6 +9,13 @@
   line-height: 100%;
 }
 
+.button-icon {
+  opacity: 0.2;
+  
+  outline-style: none;
+
+}
+
 #home-nav {
   /*position: absolute;*/
   margin-right: 16px;
@@ -75,6 +82,14 @@
   position: relative;
   padding: 36px;
   margin: 16px;
+}
+
+.blur-div {
+  z-index: 98;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(51, 51, 51, 0.7);
 }
 
 .game-card {

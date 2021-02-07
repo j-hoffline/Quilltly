@@ -69,10 +69,7 @@ class Settings extends React.Component {
         return (
             <>
                 <Container className="d-flex align-items-center justify-content-center body">
-                    <div className="login align-items-center mt-5">
-                        <h1 className="text-center mb-4 title">
-                            Profile Settings
-                    </h1>
+                    <div className="align-items-center mt-5">
                         <div>
                             {this.state.error && <Alert variant="danger">{this.state.error}</Alert>
                             }
@@ -94,18 +91,18 @@ class Settings extends React.Component {
                             </Form.Group>
 
 
-                        <Button type="submit">
+                        <div className="bubble-button">
                                 Change Email
-                        </Button>
+                        </div>
 
 
                         </Form>
 
-                        <Form>
-                            <Form.Label>Password Reset: </Form.Label>
-                            <Button onClick={this.resetPassword}>
+                        <Form className="mt-5">
+                            <Form.Label>Send Password Reset Email </Form.Label>
+                            <div className="bubble-button" onClick={this.resetPassword}>
                                 Reset
-                        </Button>
+                        </div>
                         </Form>
 
                     </div>
