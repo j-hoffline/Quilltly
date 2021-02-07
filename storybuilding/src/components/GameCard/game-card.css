@@ -69,7 +69,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 60vh;
+    height: 70vh;
     width: 75vw;
     background-color: #fff;
     border-radius: 8px;
@@ -83,4 +83,8 @@
     border-radius: 8px;
     border: 2px solid #343A40;
     padding: 8px;
+}
+
+.preview-text {
+    color: grey;
 }

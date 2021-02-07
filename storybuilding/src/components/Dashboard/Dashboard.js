@@ -1,16 +1,16 @@
 import React from 'react';
-
-import Logo from './images/quill-n-ink-earlybird.png';
+import {Redirect} from 'react-router-dom';
+import Logo from './images/quill-n-ink 2.png';
 import TimelineBlip from './images/iconmonstr-circle-2.svg';
-import NotificationBell from './images/iconmonstr-bell-1.svg';
+import SearchIcon from './images/iconmonstr-magnifier-5.svg';
 import SettingsGear from './images/iconmonstr-gear-10.svg';
 import ProfileIcon from './images/iconmonstr-user-20.svg';
 import './dashboard-style.css';
-import PublicStoryCard from '../PublicStoriesPage/PublicStoryCard';
+import {database} from '../firebase';
 import PublicStoriesPage from '../PublicStoriesPage/PublicStoriesPage';
 import RecentGamesPage from '../RecentGamesPage/RecentGamesPage';
 import CreateNewGamePage from '../CreateNewGamePage/CreateNewGamePage';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, Form } from 'react-bootstrap';
 import Signout from "../AuthPages/Signout.js"
 import Settings from "../AuthPages/Settings.js";
 
@@ -22,13 +22,31 @@ class Dashboard extends React.Component {
             recentGamesFocus: true,
             publicGamesFocus: false,
             createNewGameFocus: false,
-            newNotification: false,
             modalOpen:false,
             settingsToggle: false,
-            profileToggle:false
+            profileToggle:false,
+            searchedGameCode: "",
+            searchSuccess: false,
+            gameData: {}
         }
 
         this.focusTag = this.focusTag.bind(this);
+        this.searchGame = this.searchGame.bind(this);
+    }
+
+    searchGame() {
+        let searchCode = document.getElementById("search-bar").value;
+        if (searchCode) {
+            database.ref('games/' + searchCode).once('value').then((snapshot) => {
+                let results = snapshot.val();
+                if (!results) {
+                    alert("No games found with that code");
+                } else {
+                    this.setState({...this.state, searchSuccess: true, gameData: results});
+                }
+            }).then(() => (this.render()))
+            .catch((error) => alert(error))
+        }
     }
 
     //Passed in string is given by selected nav-tag
@@ -77,16 +95,15 @@ class Dashboard extends React.Component {
 
     componentDidMount() {
         this.focusTag();
-
-        if (this.state.newNotification) {
-            document.getElementById("notification-blip").style.visibility = "visible";
-        } else {
-            document.getElementById("notification-blip").style.visibility = "hidden"
-        }
-        this.focusTag();
     }
 
     render() {
+        if (this.state.searchSuccess) {
+            return(<Redirect to={{
+                pathname: "/search-success",
+                state: this.state.gameData
+            }}/>);
+        }
         return(
             <div className="dashboard">
                 <div className="nav-bar" id="nav-bar">
@@ -99,11 +116,10 @@ class Dashboard extends React.Component {
                 </div>
 
                 <div className="user-actions">
-                    <div className="user-action">
-                        
-                        <img className="user-action" src={NotificationBell} alt="Notifications" />
-                        <div id="notification-blip" className="notification-blip"></div>
-                    </div >
+                    <Form.Control type="text" placeholder="Search game" className="search-bar user-action" id="search-bar"
+                        onChange={(event) => this.setState({...this.state, searchedGameCode: event.target.value})}
+                        onSubmit={() => window.location.replace('/search')}></Form.Control>
+                        <img src={SearchIcon} className="user-action" onClick={this.searchGame}/>
                     <div className="user-action" 
                         onClick={() => (this.setState({...this.state, modalOpen: true, settingsToggle: true, profileToggle:false}))}>
                         <img className="user-action" src={SettingsGear} alt="Settings" />
@@ -115,7 +131,7 @@ class Dashboard extends React.Component {
                 </div>
             </div>
 
-            {this.state.modalOpen }
+            {this.state.modalOpen && <div className="blur-div"></div>}
 
             <Modal className="modal" show={this.state.modalOpen}>
                 <Modal.Header>

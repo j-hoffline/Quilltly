@@ -7,6 +7,7 @@ import Login from './components/AuthPages/Login';
 import SignUp from './components/AuthPages/Signup';
 import PublicStoriesPage from './components/PublicStoriesPage/PublicStoriesPage';
 import AddToStoryPage from './components/AddToStoryPage/AddToStoryPage';
+import SearchGame from './components/SearchGame/SearchGame';
 import Dashboard from './components/Dashboard/Dashboard';
 import Settings from './components/AuthPages/Settings';
 
@@ -43,6 +44,7 @@ function App() {
           <Route path="/public" exact component={PublicStoriesPage}/>
           <Route path="/settings" exact component={Settings}/>
           <Route path="/add-to-story" exact component={AddToStoryPage}/>
+          <Route path="/search-success" exact component={SearchGame} />
         </Router>
       </div>
     );

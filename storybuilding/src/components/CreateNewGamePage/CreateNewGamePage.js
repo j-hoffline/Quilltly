@@ -35,18 +35,22 @@ class CreateNewGamePage extends React.Component {
                 if (this.state.storyIntro.trim().split(" ").length !== 1) {return this.setState({...this.state, error: "Story introduction does not match set max length."})}
                 splitStr = " "; //Split by space
                 maxLength = "1" //1 word limit
+                break;
             case 'One Sentence':
                 if (this.state.storyIntro.trim().length > 150) {return this.setState({...this.state, error: "Story introduction does not match set max length. (Max: 150 characters)"})}
                 splitStr = "."; //Split by sentence
                 maxLength = "150" //150 character limit
+                break;
             case 'One Paragraph':
                 if (this.state.storyIntro.trim().split(" ").length > 120) {return this.setState({...this.state, error: "Story introduction does not match set max length. (Max: 120 words)"})}
                 splitStr = "\n"; //Split by paragraph
                 maxLength = "120" //120 word limit
+                break;
             case 'Tweet Length':
                 if (this.state.storyIntro.trim().length > 280) {return this.setState({...this.state, error: "Story introduction does not match set max length. (Max: 280 words)"})}
                 //No split str, split by padding spaces??
                 maxLength = "280" //Character limit
+                break;
         }
 
         let contentArr = this.state.storyIntro.split(splitStr); //Split story intro into list based on splitStr

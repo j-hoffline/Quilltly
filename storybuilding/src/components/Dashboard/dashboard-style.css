@@ -3,23 +3,25 @@
 }
 
 .nav-bar { 
-  margin-top: 8px; 
-  position: relative;
-  
-  line-height: 100%;
+  margin-top: 0px; 
+  margin-right: 0;
+  position: relative;  
+  line-height: 64px;
+  background-color: #fff;
+  padding: 8px;
+  height: 72px;
+  box-shadow: 0 2px 4px #333;
 }
 
 .button-icon {
-  opacity: 0.2;
-  
+  opacity: 0.2;  
   outline-style: none;
-
 }
 
 #home-nav {
-  /*position: absolute;*/
   margin-right: 16px;
   margin-left: 16px;
+  height: 52px;
 }
 
 .img-icon {
@@ -30,8 +32,6 @@
 
 .nav-tags {
   display: inline;
-  line-height: 100%;
-  vertical-align: bottom;
   margin-left: 8px;
 }
 
@@ -66,6 +66,16 @@
   height: 28px;
   display: inline;
 }
+.user-action:hover {
+  cursor: pointer;
+}
+
+.search-bar {
+  font-size: 18px;
+  border-radius: 8px;
+  border: 2px solid black;
+  width: 130px;
+}
 
 .notification-blip {
   height: 10px;
@@ -87,6 +97,7 @@
 .blur-div {
   z-index: 98;
   position: absolute;
+  top: 0;
   height: 100%;
   width: 100%;
   background-color: rgba(51, 51, 51, 0.7);

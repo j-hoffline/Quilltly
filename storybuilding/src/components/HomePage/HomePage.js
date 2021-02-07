@@ -62,7 +62,8 @@ class HomePage extends React.Component {
                 <div>
                     <video src={VidBackground} autoPlay muted loop />
                     <div>
-                        <NavBar id="nav" />
+                        {//<NavBar id="nav" />
+    }
                     </div>
 
                     <div class="welcome-card">

@@ -8,7 +8,7 @@ import TimelineBlip from './images/iconmonstr-circle-2.svg';
 class GameCard extends React.Component {
     constructor(props) {
         super(props);
-
+        console.log(this.props.gameInfo.focused);
         this.state = {
             id: this.props.gameInfo.id,
             content: this.props.gameInfo.gameInfo.content,
@@ -21,10 +21,14 @@ class GameCard extends React.Component {
             players: this.props.gameInfo.gameInfo.players,
             public: this.props.gameInfo.gameInfo.public,
             title: this.props.gameInfo.gameInfo.title,
-            focused: false,
+            focused: this.props.gameInfo.focused || false,
             synopsisToggle: true,
             wordByWordToggle: false,
             addToStoryToggle: false,
+        }
+
+        if (this.props.gameInfo.focused) {
+            setTimeout(() => this.focusGame, 500);
         }
 
         this.focusGame = this.focusGame.bind(this);
@@ -151,6 +155,7 @@ class GameCard extends React.Component {
                                 <div className="story-setting">Public: {this.state.public ? "Yes" : "No"}</div>
                                 <div className="story-setting">Open: {this.state.open ? "Yes" : "No"}</div>
                                 <div className="story-setting">Created On: {this.state.dateStarted}</div>
+                                <div className="story-setting">Game Code: {this.state.id}</div>
                             </div>
                         </div>
                     </div>
