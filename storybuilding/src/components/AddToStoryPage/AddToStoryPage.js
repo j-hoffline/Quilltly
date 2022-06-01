@@ -101,8 +101,9 @@ class AddToStoryPage extends React.Component {
 
     render() {
         return(
+            <section className="container is-fluid" style={{backgroundColor: "#f0f0f0", minHeight: "100vh"}}>
             <div style={{textAlign: "center", fontFamily: "Poppins"}}>
-                <h2>{this.state.title}</h2>
+                <h1 className='is-size-1'>{this.state.title}</h1>
                 {this.state.error && <Alert variant="danger">{this.state.error}</Alert>}
                 <div className="add-to-story-div">
                     <textarea className="textarea" placeholder="Write here..." 
@@ -114,12 +115,15 @@ class AddToStoryPage extends React.Component {
                     <div id ="counter-div"> Submission Length:  
                         <span id="counter">{`\t${this.state.newContribution.length}`}</span> / <span id="maxCounter">{this.state.maxLength}</span>
                     </div>
-                    <button className="bubble-button" onClick={() => {
+                    <button className='button' style={{margin: "1%"}}
+                        onClick={() => {window.location.replace("/dashboard")}}>Back</button>
+                    <button className="button is-warning" onClick={() => {
                         document.getElementById("preview-text").value = `${this.state.contentStr} \t${this.state.newContribution}`
-                    }}>Preview</button>
-                    <button className="submit-button bubble-button" onClick={this.addToStory}>Add to story</button>
+                    }} style={{margin: "1%"}}>Preview</button>
+                    <button className="button is-link" onClick={this.addToStory} style={{margin: "1%"}}>Add to story</button>
                 </div>
             </div>
+            </section>
         );
     }
 }

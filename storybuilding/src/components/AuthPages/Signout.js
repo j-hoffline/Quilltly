@@ -26,22 +26,30 @@ class Signout extends React.Component {
 
     render() {
         return (
-            <>
-                <Container className="align-items-center justify-content">
-                    <div>
-                    {this.state.error && <Alert variant="danger">{this.state.error}</Alert>
-                    }
-                    </div>
+            <>   
+            <div className='block'>
+                {this.state.error && 
+                    <article class="message is-danger">
+                        <div class="message-body">
+                            {this.state.error}
+                        </div>
+                    </article>}
+            </div>
 
-                    <div className="mb-3">
-                        Email: {this.state.user.email}
-                    </div>
+            <div className='columns container'>
 
-                    <div className="bubble-button"
-                        onClick={this.signOutUser}>
-                        Sign Out
-                    </div>
-                </Container>
+                <div class="column is-two-thirds">
+                    <input class="input" type="text" placeholder={`Account: ${this.state.user.email}`} readOnly />
+                </div>
+
+                <div className='column has-text-right'>
+                    <button className="button is-light is-danger"
+                            onClick={this.signOutUser}>
+                            Sign Out
+                    </button>
+                </div>
+
+            </div>
             </>
         )
     }

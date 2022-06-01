@@ -2,7 +2,6 @@ import React from "react";
 import { Form, Button, Alert, Container } from "react-bootstrap";
 import { Link, Redirect, useHistory } from "react-router-dom";
 import { app, auth } from '../firebase';
-import "./AuthStyles.css";
 
 class Login extends React.Component {
   constructor(props) {
@@ -33,29 +32,34 @@ class Login extends React.Component {
   render() {
     return(
       <>
-      <Container>
         <div className="login-wrapper">
 
-          {this.state.error && <Alert variant="danger">{this.state.error}</Alert>}
+          {this.state.error && <article class="message is-danger">
+                        <div class="message-body">
+                            {this.state.error}
+                        </div>
+                    </article>}
 
-          <Form className="auth-form" onSubmit={this.loginUser}>
-            <Form.Group id="email" className="form-group">
-              <Form.Control type="email" placeholder="Email"  className="form-control" 
+          <form className="auth-form" onSubmit={this.loginUser}>
+
+            <div id="email" className="field">
+              <label className="label">Email</label>
+              <input type="email" placeholder="Email"  className="input" 
                 onChange={(event) => this.setState({...this.state, emailRef: event.target.value})} required />
-            </Form.Group>
+            </div>
 
-            <Form.Group id="password" className="form-group">
-              <Form.Control type="password" placeholder="Password" className="form-control"
+            <div id="password" className="field">
+              <label className="label">Password</label>
+              <input type="password" placeholder="Password" className="input password"
                 onChange={(event) => this.setState({...this.state, passwordRef: event.target.value})} required />
-            </Form.Group>
+            </div>
 
-            <Button className="bubble-button submit-button" variant="secondary" type="submit">
-              Submit
-            </Button>
+            <div class="control">
+              <button class="button is-link">Submit</button>
+            </div>
 
-          </Form>
+          </form>
         </div>
-      </Container>
       </>
     );
   }

@@ -2,6 +2,7 @@
 import React from "react";
 import { Container, Form, Button, Alert } from "react-bootstrap"
 import { auth } from '../firebase';
+import Signout from "./Signout";
 
 
 class Settings extends React.Component {
@@ -62,52 +63,46 @@ class Settings extends React.Component {
         }
     }
 
-
-
-
     render() {
         return (
-            <>
-                <Container className="d-flex align-items-center justify-content-center body">
-                    <div className="align-items-center mt-5">
-                        <div>
-                            {this.state.error && <Alert variant="danger">{this.state.error}</Alert>
-                            }
+            <div>
+            <div>
+                {this.state.msg}
+            </div>
+
+                <form className="form" onSubmit={this.changeEmail}>
+                    
+                    <p className="is-size-5 block">Change Account Email</p>
+        
+                        <div className="field">
+                            <label className="label">New Email:  </label>
+                            <input className="input" type="newemail" onChange={(event) => this.setState({ ...this.state, newEmail: event.target.value })} required />
                         </div>
-                        <div>
-                            {this.state.msg}
+
+                    
+                        <div className="field">
+                            <label className="label">Password: </label>
+                            <input className="input" type="password" onChange={(event) => this.setState({ ...this.state, password: event.target.value })} />
+                        </div>
+
+                        <div className="block">
+                            <button className="button is-warning">
+                                    Change Email
+                            </button>
+                        </div>
+
+                    <div className="container columns is-gapless">
+                        <div className="column has-text-left">
+                            <p className="is-size-5">Send Password Reset Link</p>
+                        </div>
+                        <div className="column has-text-left">
+                            <button className="button is-danger" onClick={this.resetPassword}>
+                                Reset Password
+                            </button>
+                        </div>
                     </div>
-
-                        <Form className="form" onSubmit={this.changeEmail}>
-
-                            <Form.Group>
-                                <Form.Label>New Email:  </Form.Label>
-                                <Form.Control type="newemail" onChange={(event) => this.setState({ ...this.state, newEmail: event.target.value })} required />
-                            </Form.Group>
-
-                            <Form.Group>
-                                <Form.Label>Re-enter Password: </Form.Label>
-                                <Form.Control type="password" onChange={(event) => this.setState({ ...this.state, password: event.target.value })} />
-                            </Form.Group>
-
-
-                        <div className="bubble-button">
-                                Change Email
-                        </div>
-
-
-                        </Form>
-
-                        <Form className="mt-5">
-                            <Form.Label>Send Password Reset Email </Form.Label>
-                            <div className="bubble-button" onClick={this.resetPassword}>
-                                Reset
-                        </div>
-                        </Form>
-
-                    </div>
-                </Container>
-            </>
+                </form>
+            </div>
         );
 
     }

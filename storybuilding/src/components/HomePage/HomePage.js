@@ -4,17 +4,19 @@ import {auth} from '../firebase';
 //import "./home-page.css";
 import VidBackground from './media/quilltly-background.mp4';
 import Logo from './media/quill-n-ink-white.png';
-import "./home-page-concept.css";
+// import "./home-page-concept.css";
 import { Modal, Button, ButtonGroup, Dropdown, DropdownButton, DropdownMenu, DropdownItem } from "react-bootstrap";
 import Login from "../AuthPages/Login.js";
 import Signup from "../AuthPages/Signup";
 import ForgotPassword from '../AuthPages/ForgotPass';
 import NavBar from "./HomeNav";
+import Nav from '../Nav';
 
 
 class HomePage extends React.Component {
     constructor(props) {
         super(props);
+        this.heroImg = "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1742&q=80";
         this.taglineLibrary = ["Get Serious. Get Stories", "The Wonder Has A Name: Stories.",
             "You're In Good Hands With Stories.", "Stories, Couldn't Ask For More.",
             "Have You Had Your Stories Today?", "Stories Built To Perfection.",
@@ -32,20 +34,22 @@ class HomePage extends React.Component {
         ];
 
         this.state = {
-            modalOpen: false,
+            showNav: false,
             loginToggle: false,
             signupToggle: false,
+            tagline: ""
         };
 
         this.footerToggle = this.footerToggle.bind(this);
     }
 
     componentDidMount() {
+        console.log(window.screen.availWidth);
+        //Choose random tagline to display from array
         let randomTaglineIndx = Math.floor(Math.random() * this.taglineLibrary.length);
-        let taglineElement = document.getElementById("tagline");
-        if (taglineElement) {
-            taglineElement.innerHTML = this.taglineLibrary[randomTaglineIndx];
-        }
+        //let taglineElement = document.getElementById("tagline");
+
+        this.setState({...this.state, tagline: this.taglineLibrary[randomTaglineIndx]}); 
 
         setTimeout(() => {
             if (auth.currentUser) {window.location.replace("/dashboard")}
@@ -58,81 +62,36 @@ class HomePage extends React.Component {
 
     render() {
         return(
-            <div>
-                <div>
-                    <video src={VidBackground} autoPlay muted loop />
-                    <div>
-                        {//<NavBar id="nav" />
-    }
-                    </div>
+            <section class="hero is-fullheight is-info" style={{height: "100%", backgroundImage: `url(${this.heroImg})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "right"}}>
+            {/* <video src={VidBackground} autoPlay muted loop style={{position:"absolute", height: "100%", width: "100%"}}/> */}
+            <Nav/>
+  {/* <!-- Hero content: will be in the middle --> */}
+  <div class="hero-content has-text-centered" > {/*columns container is-fluid*/}
+  {/* <div className='container columns'> */}
+      <h1 className="title is-size-1">
+        Quilltly
+      </h1>
+      <p className="subtitle" id="tagline">
+        {this.state.tagline}
+      </p>
 
-                    <div class="welcome-card">
-                        <div class="tagline-div">
-                            <div>
-                                <img id="logo" src={Logo} alt="Quill" />
-                                <h1>Quilltly</h1>
-                            </div>
-                            <h4 id="tagline">{this.tagline}</h4>
-                        </div>
 
-                        <div class="button-div">
-                            <Button className="bubble-button" id="log-in-button" variant="primary"
-                                onClick={() => (this.setState({...this.state, modalOpen: true, loginToggle: true}))}>
-                                Log In
-                            </Button> <br />
+  
+  {/* </div> */}
+  </div>
 
-                            <Button className="bubble-button" id="sign-up-button" variant="primary"
-                                onClick={() => (this.setState({...this.state, modalOpen: true, signupToggle: true}))}>
-                                Sign Up
-                            </Button>
-                        </div>
-                    </div>
-
-                    {this.state.modalOpen && <div className="blur-div"></div>}
-
-                    <Modal className="modal" show={this.state.modalOpen}>
-                        <Modal.Header>
-                            <Modal.Title className="modal-header">
-                                {this.state.loginToggle && "Log in"}
-                                {this.state.signupToggle && "Sign Up"}
-                                {this.state.forgotPasswordToggle && "Forgot Password"}
-                            </Modal.Title>
-                            <button id="closeButton" type="button"
-                                onClick={() => (this.setState({...this.state, modalOpen: false, loginToggle: false, signupToggle: false, forgotPasswordToggle: false}))}>
-                                    X
-                            </button>
-                        </Modal.Header>
-
-                        <Modal.Body>
-                            {this.state.loginToggle && <Login />}
-                            {this.state.signupToggle && <Signup />}
-                            {this.state.forgotPasswordToggle && <ForgotPassword />}
-                        </Modal.Body>
-
-                        <Modal.Footer>
-                            {this.state.loginToggle &&
-                                <div>
-                                    <div>
-                                        <Link onClick={() => (this.setState({...this.state, signupToggle: false, loginToggle: false, forgotPasswordToggle: true}))}>
-                                            Forgot Password?
-                                        </Link>
-                                    </div>
-
-                                    <div>
-                                        Need an account? <Link onClick={() => (this.setState({...this.state, signupToggle: true, loginToggle: false}))}>
-                                            Sign Up
-                                        </Link>
-                                    </div>
-                                </div>}
-
-                            {this.state.signupToggle &&
-                                <div className="w-100 text-center mt-2">
-                                    Already have an account? <Link onClick={() => (this.setState({...this.state, signupToggle: false, loginToggle: true}))}>Log In</Link>
-                                </div>}
-                        </Modal.Footer>
-                    </Modal>
-                </div>
-            </div>
+  {/* <!-- Hero footer: will stick at the bottom --> */}
+  <div class="hero-foot">
+    <nav class="tabs is-boxed is-fullwidth">
+      <div class="container">
+        <ul>
+          <li class="is-active"><a>Home</a></li>
+          <li><Link to="/about">About</Link></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</section>
         );
     }
 }

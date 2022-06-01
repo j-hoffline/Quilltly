@@ -1,5 +1,4 @@
 import React from 'react';
-import './game-card.css';
 
 class PublicStoryCard extends React.Component {
     constructor(props) {

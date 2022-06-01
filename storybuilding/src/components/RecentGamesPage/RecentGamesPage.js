@@ -1,11 +1,12 @@
+import { createBrowserHistory } from 'history';
 import React from 'react';
 import { auth, database } from '../firebase';
-import './dashboard-game-card.css';
 import GameCard from '../GameCard/GameCard';
 
 class RecentGamesPage extends React.Component {
     constructor(props) {
         super(props);
+        const history = createBrowserHistory();
 
         this.state = {
             error: "",
@@ -22,7 +23,6 @@ class RecentGamesPage extends React.Component {
 
     toggleNav() {
         document.getElementById("nav-bar").style.visibility = "hidden";
-        console.log("click");
     }
 
     getUserGames(user) {
@@ -44,13 +44,28 @@ class RecentGamesPage extends React.Component {
 
     render() {
         if (this.state.error) {
-            return(<div style={{marginTop: "30px"}}>
-                We're sorry, an error has occurred. Please try logging in again. <br/>
-                {this.state.error}
-                </div>);
+            return(
+                <article class="message is-danger">
+                    <div class="message-body">
+                        We're sorry, an error has occurred. Please try logging in again. <br/>
+                        {this.state.error}
+                    </div>
+                </article>);
         }
         else if (this.state.gameArr.length == 0) {
-            return(<div style={{marginTop: "30px"}}>You haven't made any games.</div>)
+            return(
+                <>
+                    <article class="message is-dark">
+                        <div class="message-body">
+                            You haven't made any games yet. 
+                        </div>
+                    </article>
+                    <div className='container has-text-centered'>
+                        <button class="button is-info" style={{margin: "1%"}} onClick={() => this.props.focusTag('createNewGameTag')}>Create New Game</button>
+                        <button class="button" style={{margin: "1%"}} onClick={() => {this.props.focusTag('publicGamesTag')}}>View Public Games</button>
+                    </div>
+              </>
+            )
         } else {
         return(
             <div>
